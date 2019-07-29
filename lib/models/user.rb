@@ -24,20 +24,4 @@ class User < ActiveRecord::Base
     team.list_members
   end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 end
