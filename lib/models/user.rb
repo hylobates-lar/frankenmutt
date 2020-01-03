@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   end
 
   def self.handle_new_user
-    puts "Hello stranger! 👋 What is your name?"
+    puts "\nHello stranger! 👋 What is your name?"
     system `say "Hello stranger! What is your name?"`
     name = check_for_blank_name
     User.create(name: name) 
@@ -141,50 +141,57 @@ class User < ActiveRecord::Base
     my_mutts = self.mutts.reload.map do |mutt|
       mutt.name
     end
-    system `say "Here are your mutts! I hope you\'ve thought long and hard about this..."`
-    choice = TTY::Prompt.new.select("Here are your mutts! I hope you've thought long and hard about this...", my_mutts)
-    chosen_mutt = Mutt.find_by(name: choice)
-    puts ""
-    system `say "Are you SURE you want to delete #{chosen_mutt.name}?"`
-    yes = TTY::Prompt.new.yes?("Are you SURE you want to delete #{chosen_mutt.name}?? 🥺 ")
-      if yes
-        system `say "Are you really REALLY sure?? #{chosen_mutt.name} says I'll be a good dog, I swear!!"`
-        play_whining
+    if my_mutts.length == 0
+      puts "\nBooooo no pups here! 😢\n\n"
+      system `say "Booooo no pups here!"`
+      sleep(2)
+      cli.what_next
+    else
+      system `say "Here are your mutts! I hope you\'ve thought long and hard about this..."`
+        choice = TTY::Prompt.new.select("Here are your mutts! I hope you've thought long and hard about this...", my_mutts)
+        chosen_mutt = Mutt.find_by(name: choice)
         puts ""
-        yes_again = TTY::Prompt.new.yes?("Are you really REALLY sure?? #{chosen_mutt.name} says \"I'll be a good dog, I swear!!\" 🐶  🙏 ")
-          if yes_again
-            puts "\nWow. That was cold."
-            system `say "Wow. That was cold"`
-            sleep(2)
-            puts "\n😭  💔  😭"
-            sleep(2)
-            puts "\n#{chosen_mutt.name} has gone off to live on a farm. 🌈"
-            system `say "#{chosen_mutt.name} has gone off to live on a farm."`
+        system `say "Are you SURE you want to delete #{chosen_mutt.name}?"`
+        yes = TTY::Prompt.new.yes?("Are you SURE you want to delete #{chosen_mutt.name}?? 🥺 ")
+          if yes
+            system `say "Are you really REALLY sure?? #{chosen_mutt.name} says I'll be a good dog, I swear!!"`
+            play_whining
             puts ""
-            print_farm
-            chosen_mutt.destroy
-            sleep(4)
-            system "clear"
-            cli.what_next
+            yes_again = TTY::Prompt.new.yes?("Are you really REALLY sure?? #{chosen_mutt.name} says \"I'll be a good dog, I swear!!\" 🐶  🙏 ")
+              if yes_again
+                puts "\nWow. That was cold."
+                system `say "Wow. That was cold"`
+                sleep(2)
+                puts "\n😭  💔  😭"
+                sleep(2)
+                puts "\n#{chosen_mutt.name} has gone off to live on a farm. 🌈"
+                system `say "#{chosen_mutt.name} has gone off to live on a farm."`
+                puts ""
+                print_farm
+                chosen_mutt.destroy
+                sleep(4)
+                system "clear"
+                cli.what_next
+              else
+                puts "\nWHEW that was a CLOSE one. You've made the right choice!!"
+                system `say "WHEW. that was a CLOSE one. You\'ve made the right choice!"`
+                sleep(1)
+                puts "\n🐶  💩"  
+                sleep(2)
+                puts "\nOh...you might want to clean that up..."
+                system 'say "Oh...you might want to clean that up..."'
+                sleep(4)
+                system "clear"
+                cli.what_next
+              end
           else
-            puts "\nWHEW that was a CLOSE one. You've made the right choice!!"
-            system `say "WHEW. that was a CLOSE one. You\'ve made the right choice!"`
-            sleep(1)
-            puts "\n🐶  💩"  
-            sleep(2)
-            puts "\nOh...you might want to clean that up..."
-            system 'say "Oh...you might want to clean that up..."'
-            sleep(4)
+            puts "\n#{chosen_mutt.name} thanks you!! 🐶  Woof! Woof!"
+            system `say "#{chosen_mutt.name} thanks you!! Woof! Woof!"`
+            sleep(3)
             system "clear"
             cli.what_next
           end
-      else
-        puts "\n#{chosen_mutt.name} thanks you!! 🐶  Woof! Woof!"
-        system `say "#{chosen_mutt.name} thanks you!! Woof! Woof!"`
-        sleep(3)
-        system "clear"
-        cli.what_next
-      end
+        end
   end
 
   def logout
