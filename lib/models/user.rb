@@ -48,9 +48,10 @@ class User < ActiveRecord::Base
       chosen_mutt = Mutt.find_by(name: choice)
 
       chosen_mutt.breeds.each do |breed| 
-        puts "\n#{breed.name}: #{breed.personality}"
+        puts "\n#{chosen_mutt.name} is part #{breed.name}: #{breed.personality}"
+        system `say "#{chosen_mutt.name} is part #{breed.name}: #{breed.personality}"`
+        sleep(1)
       end
-      sleep(5) 
     end
     puts ""
     cli.what_next
@@ -65,14 +66,14 @@ class User < ActiveRecord::Base
     end
   
     choices = TTY::Prompt.new.multi_select("Please choose 2 or more breeds to create your mutt.", breeds.sort)
-    # show full list instead of scrolling
+    
     if choices.length < 2
       puts "Error: Please select at least 2 breeds to create your mutt!"
       sleep(2)
       self.create_mutt(cli)
     else
-      puts "What should we call your mutt?"
-      # system 'say "What should we call your mutt?"'
+      puts "\nWhat should we call your mutt?"
+      
       name = check_for_blank_name 
 
       new_mutt = Mutt.create(name: name, user_id: self.id)
@@ -81,15 +82,10 @@ class User < ActiveRecord::Base
         breed = Breed.find_by(name: choice)
         MuttBreed.create(mutt_id: new_mutt.id, breed_id: breed.id)
       end
-      # msg = 'WARNING: GRAPHIC IMAGE. SHIELD THE EYES OF CHILDREN.'.colorize(:red)
-      # 5.times do
-      #   print "\r#{ ' ' * msg.size }"
-      #   sleep 0.5
-      #   print "\r#{ msg }"
-      #   sleep 0.5
-      # end
-      puts "\n\nWARNING: GRAPHIC IMAGE. SHIELD THE EYES OF CHILDREN.\n".colorize(:red)
-      system `say "WARNING: GRAPHIC IMAGE. SHIELD THE EYES OF CHILDREN."`
+      
+      flash_warning
+      
+      puts ""
       sleep(1)
       puts <<-'EOF' 
                      __
@@ -103,10 +99,10 @@ class User < ActiveRecord::Base
                  _||   _||_||
             EOF
 
-      sleep(3)
+      sleep(2)
       puts "\n\n#{name} has been added to your mutts! 🐶  Woof Woof!"
       system `say "#{name} has been added to your mutts! Woof Woof!"`
-      sleep(3)
+      sleep(2)
       system "clear"
       cli.what_next
     end
@@ -120,10 +116,10 @@ class User < ActiveRecord::Base
     end
     choice = TTY::Prompt.new.select("Here are your mutts! 🐶  Choose 1 to update their info.", my_mutts)
     chosen_mutt = Mutt.find_by(name: choice)
-    
+    puts ""
     yes = TTY::Prompt.new.yes?("Would you like to change your mutt's name?")
       if yes
-        puts "Please enter a new name for this mutt."
+        puts "\nPlease enter a new name for this mutt."
         new_name = check_for_blank_name
         
         chosen_mutt.update(name: new_name) 
@@ -148,11 +144,13 @@ class User < ActiveRecord::Base
     system `say "Here are your mutts! I hope you\'ve thought long and hard about this..."`
     choice = TTY::Prompt.new.select("Here are your mutts! I hope you've thought long and hard about this...", my_mutts)
     chosen_mutt = Mutt.find_by(name: choice)
+    puts ""
     system `say "Are you SURE you want to delete #{chosen_mutt.name}?"`
     yes = TTY::Prompt.new.yes?("Are you SURE you want to delete #{chosen_mutt.name}?? 🥺 ")
       if yes
         system `say "Are you really REALLY sure?? #{chosen_mutt.name} says I'll be a good dog, I swear!!"`
         play_whining
+        puts ""
         yes_again = TTY::Prompt.new.yes?("Are you really REALLY sure?? #{chosen_mutt.name} says \"I'll be a good dog, I swear!!\" 🐶  🙏 ")
           if yes_again
             puts "\nWow. That was cold."
@@ -162,6 +160,8 @@ class User < ActiveRecord::Base
             sleep(2)
             puts "\n#{chosen_mutt.name} has gone off to live on a farm. 🌈"
             system `say "#{chosen_mutt.name} has gone off to live on a farm."`
+            puts ""
+            print_farm
             chosen_mutt.destroy
             sleep(4)
             system "clear"
@@ -189,8 +189,10 @@ class User < ActiveRecord::Base
 
   def logout
     system "clear"
-    puts "See ya later! 👋\n"
     system `say "Bye bye!"`
+    play_music
+    DogRunning.animation
+    puts "\nSee ya later! 👋\n"
     sleep(2)
   end
 

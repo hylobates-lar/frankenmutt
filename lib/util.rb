@@ -13,6 +13,40 @@ def play_whining
     pid = fork{exec 'afplay', "lib/257824__piink-aces__dog-whining-sound.mp3"}
 end
 
+def play_music
+    pid = fork{exec 'afplay', "lib/cartoon-game-theme-loop-fade.mp3"}
+end
+
+def flash_warning
+    msg = 'WARNING: GRAPHIC IMAGE. SHIELD THE EYES OF CHILDREN.'.colorize(:red)
+    puts ""
+    system `say "WARNING: GRAPHIC IMAGE. SHIELD THE EYES OF CHILDREN."`
+    3.times do
+    # puts "\n\nWARNING: GRAPHIC IMAGE. SHIELD THE EYES OF CHILDREN.\n".colorize(:red)
+        print "\r#{ ' ' * msg.size }"
+        sleep 0.5
+        print "\r#{ msg }"
+        sleep 0.5
+    end
+    # print msg
+    puts ""
+end
+
+def print_farm
+    puts <<-'EOF'
+                            
+                           _.-^-._    .--.
+                        .-'   _   '-. |__|
+                       /     |_|     \|  |
+                      /               \  |
+                     /|     _____     |\ |
+                      |    |==|==|    |  |
+  |---|---|---|---|---|    |--|--|    |  |
+  |---|---|---|---|---|    |==|==|    |  |
+ ^jgs^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    EOF
+end
+
 def yorkie_image
     puts <<-'EOF'                                                                                                                                                 
     /yoo+-                                       

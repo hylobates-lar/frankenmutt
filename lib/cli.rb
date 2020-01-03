@@ -8,19 +8,14 @@ class CLI
 
   def welcome
     system "clear"
-    puts <<-'EOF'
-    
-  _____                _                              _   _   
- |  ___| __ __ _ _ __ | | _____ _ __  _ __ ___  _   _| |_| |_ 
- | |_ | '__/ _` | '_ \| |/ / _ \ '_ \| '_ ` _ \| | | | __| __|
- |  _|| | | (_| | | | |   <  __/ | | | | | | | | |_| | |_| |_ 
- |_|  |_|  \__,_|_| |_|_|\_\___|_| |_|_| |_| |_|\__,_|\__|\__|
-  
-    EOF
-    puts ""
-    puts "Welcome to FrankenMutt! 🐶\n\n"
     system `say "Welcome to FrankenMutt"`
-      # system say ("Welcome to FrankenMutt")
+    play_music
+
+    puts ""
+    DogRunning.animation
+    DogRunning.freeze_welcome_image
+    puts "\n\nWelcome to FrankenMutt! 🐶\n\n"
+      
     sleep(1)
     
     answer = prompt.select("Are you a new user or a returning user?") do |menu|
@@ -55,7 +50,7 @@ class CLI
     end
   end
 
-  # TODO: Probably better to move this to breeds
+  
   def view_all_breeds
     system "clear"
     breeds = Breed.all.map do |breed|
