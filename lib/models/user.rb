@@ -86,7 +86,6 @@ class User < ActiveRecord::Base
       flash_warning
       
       puts ""
-      sleep(1)
       puts <<-'EOF' 
                      __
                  __/o \_
