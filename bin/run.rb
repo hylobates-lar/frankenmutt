@@ -1,6 +1,7 @@
 require_relative '../config/environment'
+require_relative '../db/seeds'
 
-cli = Interface.new
+cli = CLI.new
 user_object = cli.welcome
 
 while !user_object
@@ -11,7 +12,3 @@ cli.user = user_object
 
 choice = cli.main_menu
 
-
-
-binding.pry
-puts "hello world"

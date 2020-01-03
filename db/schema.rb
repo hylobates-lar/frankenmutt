@@ -10,20 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_28_204040) do
+ActiveRecord::Schema.define(version: 2019_12_30_203447) do
 
-  create_table "heros", force: :cascade do |t|
+  create_table "breeds", force: :cascade do |t|
     t.string "name"
-    t.string "identity"
-    t.integer "age"
+    t.text "personality"
+    t.text "characteristics"
   end
 
-  create_table "rosters", force: :cascade do |t|
-    t.integer "team_id"
-    t.integer "hero_id"
+  create_table "mutt_breeds", force: :cascade do |t|
+    t.integer "breed_id"
+    t.integer "mutt_id"
   end
 
-  create_table "teams", force: :cascade do |t|
+  create_table "mutts", force: :cascade do |t|
     t.string "name"
     t.integer "user_id"
   end
