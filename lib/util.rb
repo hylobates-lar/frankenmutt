@@ -18,17 +18,15 @@ def play_music
 end
 
 def flash_warning
-    msg = 'WARNING: GRAPHIC IMAGE. SHIELD THE EYES OF CHILDREN.'.colorize(:red)
+    msg = 'WARNING: GRAPHIC IMAGE. SHIELD THE EYES OF CHILDREN.'
     puts ""
-    system `say "WARNING: GRAPHIC IMAGE. SHIELD THE EYES OF CHILDREN."`
+    system `say #{msg}`
     3.times do
-    # puts "\n\nWARNING: GRAPHIC IMAGE. SHIELD THE EYES OF CHILDREN.\n".colorize(:red)
         print "\r#{ ' ' * msg.size }"
         sleep 0.5
-        print "\r#{ msg }"
+        print "\r#{ msg.colorize(:red) }"
         sleep 0.5
     end
-    # print msg
     puts ""
 end
 
