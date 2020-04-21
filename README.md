@@ -46,7 +46,7 @@ Delete- if you choose 'yes'
 ## Dev Tools
  
 * Ruby 
-* SQLite3Cakery Bakery
+* SQLite3
 * Sinatra ActiveRecord
 * TTY Prompt 
 * custom ASCII art
