@@ -1,6 +1,6 @@
 # Welcome to Frankenmutt!
 
- A playful mutt-generating CLI app for dog lovers.
+ A playful mutt-generating CLI app for dog lovers. Includes sounds and custom ASCII dog art.
 
 
 ## Features
