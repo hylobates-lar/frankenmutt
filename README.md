@@ -2,6 +2,7 @@
 
  A playful mutt-generating CLI app for dog lovers. Includes sounds and custom ASCII dog art.
 
+View demo [here](https://youtu.be/7sC9Xc-Neo4)
 
 ## Features
 
