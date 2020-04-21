@@ -18,28 +18,28 @@ A user can
 
 ## Screenshots
 
-![welcome](mod1/frankenmutt/lib/welcome.png)
+![welcome](/lib/welcome.png)
 
 View Breeds
-![border](mod1/frankenmutt/lib/border-collie.png)
-![golden](mod1/frankenmutt/lib/golden-retriever.png)
-![great dane](mod1/frankenmutt/lib/great-dane.png)
-![husky](mod1/frankenmutt/lib/husky.png)
-![lab](mod1/frankenmutt/lib/lab.png)
-![pitbull](mod1/frankenmutt/lib/pitbull.png)
-![pug](mod1/frankenmutt/lib/pug.png)
+![border](/lib/border-collie.png)
+![golden](/lib/golden-retriever.png)
+![great dane](/lib/great-dane.png)
+![husky](/lib/husky.png)
+![lab](/lib/lab.png)
+![pitbull](/lib/pitbull.png)
+![pug](/lib/pug.png)
 
 Create a Mutt
-![create a mutt](mod1/frankenmutt/lib/create-mutt.png)
+![create a mutt](/lib/create-mutt.png)
 
 View Mutt Details
-![mutt details](mod1/frankenmutt/lib/mutt-details.png)
+![mutt details](/lib/mutt-details.png)
 
 Delete- if you change your mind
-![delete if no](mod1/frankenmutt/lib/delete-1.png)
+![delete if no](/lib/delete-1.png)
 
 Delete- if you choose 'yes'
-![delete if yes](mod1/frankenmutt/lib/delete-2.png)
+![delete if yes](/lib/delete-2.png)
 
  
 ## Dev Tools
