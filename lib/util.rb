@@ -9,6 +9,8 @@ def check_for_blank_name
     end 
 end
 
+# Additional sounds
+
 def play_whining
     pid = fork{exec 'afplay', "lib/257824__piink-aces__dog-whining-sound.mp3"}
 end
@@ -16,6 +18,9 @@ end
 def play_music
     pid = fork{exec 'afplay', "lib/cartoon-game-theme-loop-fade.mp3"}
 end
+
+
+# Warning flashing text for creating a new mutt 
 
 def flash_warning
     msg = 'WARNING: GRAPHIC IMAGE. SHIELD THE EYES OF CHILDREN.'
@@ -29,6 +34,10 @@ def flash_warning
     end
     puts ""
 end
+
+
+
+# ASCII art
 
 def print_farm
     puts <<-'EOF'
