@@ -6,6 +6,8 @@ class CLI
   end
 
 
+  # Intro to the app with animation and login
+
   def welcome
     system "clear"
     system `say "Welcome to FrankenMutt"`
@@ -24,6 +26,9 @@ class CLI
     end
   end
 
+
+  # Show main menu
+
   def main_menu
     system "clear"
     sleep(1)
@@ -39,6 +44,9 @@ class CLI
     end
   end
 
+  
+  # Prompt for the user's next action
+
   def what_next
     TTY::Prompt.new.select("What would you like to do next?") do |menu|
       menu.choice "Create a new Mutt", -> {self.user.create_mutt(self)}
@@ -50,7 +58,9 @@ class CLI
     end
   end
 
-  
+
+  # To view all breeds when browsing
+
   def view_all_breeds
     system "clear"
     breeds = Breed.all.map do |breed|
