@@ -1,3 +1,5 @@
+# Dog running graphic for intro and outro
+
 class DogRunning
 
     def self.frame_one
